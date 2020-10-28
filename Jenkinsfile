@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('build') {
-      steps {
-        sh 'docker build . -t meowcat285/meowcatredbot:jenkins'
+      parallel {
+        stage('build') {
+          steps {
+            sh 'docker build . -t meowcat285/meowcatredbot:jenkins'
+          }
+        }
+
+        stage('whoami') {
+          steps {
+            sh 'whoami'
+          }
+        }
+
       }
     }
 
